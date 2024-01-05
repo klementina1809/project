@@ -1,5 +1,5 @@
 .outputContainer {
-  height: 136px;
+  min-height: 136px;
   width: 206px;
   background-color: rgb(254, 175, 250);
   border-radius: 4px;

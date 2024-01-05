@@ -2,13 +2,15 @@ import React from "react";
 import "../styles/btnStyle.css";
 
 function Button(props) {
-const { action, label, type } = props;
+	const { action, label,  } = props;
 
 	return (
 		<>
-			<button type={type} onClick={() => action}>{label}</button>
+			<button onClick={action}>
+				{label}
+			</button>
 		</>
 	);
 }
 
-export default  Button;
+export default Button;

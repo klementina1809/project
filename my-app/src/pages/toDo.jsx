@@ -5,23 +5,30 @@ import Output from "../components/Output";
 import "../styles/todoStyle.css";
 
 function ToDo() {
-	// const [task, setTask] = useState("");
 	const [value, setValue] = useState("");
+	const [task, setTask] = useState([]);
 
-	const clearTask = () => {
-		setValue('');
+	const addTask = () => {
+		setTask([...task, value]);
+		setValue("");
 	};
 
 	const onchangeHandler = (event) => {
-		setValue(event.target.value) ;
+		setValue(event.target.value);
 	};
 
 	return (
 		<div>
 			<div className="todoContainer">
-				<Input onchange={onchangeHandler}>{value}</Input>
-				<Button action="clearTask" label="Clear"></Button>
-				<Output ></Output>
+				<Input onchange={onchangeHandler} value={value} />
+				<Button action={addTask} label="Add" />
+				<Output
+					value={task.map((el) => (
+						<li>{el}</li>
+					))}
+				>
+					{" "}
+				</Output>
 			</div>
 		</div>
 	);
