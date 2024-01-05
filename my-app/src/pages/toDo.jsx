@@ -6,10 +6,10 @@ import "../styles/todoStyle.css";
 
 function ToDo() {
 	const [value, setValue] = useState("");
-	const [task, setTask] = useState([]);
+	const [newTask, setnewTask] = useState([]);
 
 	const addTask = () => {
-		setTask([...task, value]);
+		setnewTask([...newTask, value]);
 		setValue("");
 	};
 
@@ -23,13 +23,20 @@ function ToDo() {
 				<Input onchange={onchangeHandler} value={value} />
 				<Button action={addTask} label="Add" />
 				<Output
-					value={task.map((el) => (
-						<li>{el}</li>
+        label='To Do'
+					value={newTask.map((el) => (
+						<div>
+							<input type="checkbox" name="task" />
+							<span>{el}</span>
+						</div>
 					))}
 				>
 					{" "}
 				</Output>
 			</div>
+      <Output label='Completed'>
+
+      </Output>
 		</div>
 	);
 }
