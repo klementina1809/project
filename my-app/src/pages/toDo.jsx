@@ -7,6 +7,7 @@ import "../styles/todoStyle.css";
 function ToDo() {
 	const [value, setValue] = useState("");
 	const [newTask, setnewTask] = useState([]);
+	const [newComplitedTask, setnewComplitedTask] = useState([]);
 
 	const addTask = () => {
 		setnewTask([...newTask, value]);
@@ -17,16 +18,25 @@ function ToDo() {
 		setValue(event.target.value);
 	};
 
+	const complete = (el) => {
+		const newList = [...newTask].filter((todo) => todo !== el);
+		setnewTask(newList);
+		setnewComplitedTask([...newComplitedTask, el]);
+	};
+
 	return (
 		<div>
 			<div className="todoContainer">
 				<Input onchange={onchangeHandler} value={value} />
 				<Button action={addTask} label="Add" />
 				<Output
-        label='To Do'
+					label="To Do"
 					value={newTask.map((el) => (
 						<div>
-							<input type="checkbox" name="task" />
+							<input
+								type="checkbox"
+								onChange={() => complete(el)}
+							/>
 							<span>{el}</span>
 						</div>
 					))}
@@ -34,9 +44,18 @@ function ToDo() {
 					{" "}
 				</Output>
 			</div>
-      <Output label='Completed'>
-
-      </Output>
+			<Output
+				label="Completed"
+				value={newComplitedTask.map((el) => (
+					<div>
+						<input type="checkbox" name="task" disabled checked />
+						<span>
+							{" "}
+							<del>{el}</del>{" "}
+						</span>
+					</div>
+				))}
+			></Output>
 		</div>
 	);
 }
