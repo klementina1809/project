@@ -31,3 +31,11 @@ input {
   align-items: center;
   margin: 0px;
 }
+
+img {
+  width: 16px;
+}
+
+h4 {
+  text-align: center;
+}
