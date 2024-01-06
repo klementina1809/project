@@ -19,20 +19,27 @@ function ToDo() {
 	};
 
 	const complete = (el) => {
-		const newList = [...newTask].filter((todo) => todo !== el);
+		const newList = newTask.filter((todo) => todo !== el);
 		setnewTask(newList);
-		setnewComplitedTask([...newComplitedTask, el]);
+		setnewComplitedTask((prevComplitedTask) => [...prevComplitedTask, el]);
+	};
+	const uncomplete = (el) => {
+		const newList = newComplitedTask.filter((todo) => todo !== el);
+		setnewComplitedTask(newList);
+		setnewTask((prevTask) => [...prevTask, el]);
 	};
 
 	return (
 		<div>
 			<div className="todoContainer">
-				<Input onchange={onchangeHandler} value={value} />
-				<Button action={addTask} label="Add" />
+				<div className="inputContainer">
+					<Input onchange={onchangeHandler} value={value} />
+					<Button action={addTask} label="Add" />
+				</div>
 				<Output
 					label="To Do"
 					value={newTask.map((el) => (
-						<div>
+						<div className="inputChekbox">
 							<input
 								type="checkbox"
 								onChange={() => complete(el)}
@@ -47,8 +54,13 @@ function ToDo() {
 			<Output
 				label="Completed"
 				value={newComplitedTask.map((el) => (
-					<div>
-						<input type="checkbox" name="task" disabled checked />
+					<div className="inputChekbox">
+						<input
+							type="checkbox"
+							name="task"
+							checked
+							onChange={() => uncomplete(el)}
+						/>
 						<span>
 							{" "}
 							<del>{el}</del>{" "}
