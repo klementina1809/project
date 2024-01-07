@@ -1,7 +1,25 @@
-button {
+.btn {
 	border-radius: 4px;
 	background-color: rgb(48, 77, 48);
 	border: 0px;
 	cursor: pointer;
 	width: 76px;
+}
+
+
+.btn-container {
+	display: flex;
+	gap: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.btn-container button{
+	flex: 1;
+	width: 20px;
+	gap: 5px;
+}
+
+.clear-all {
+	width: 100%;
 }

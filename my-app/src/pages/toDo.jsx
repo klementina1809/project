@@ -8,6 +8,7 @@ function ToDo() {
 	const [value, setValue] = useState("");
 	const [newTask, setnewTask] = useState([]);
 	const [newComplitedTask, setnewComplitedTask] = useState([]);
+	const [total, setTotal] = useState(0);
 	// const [allTask, setallTask] = useState("Add new task");
 
 	const onchangeHandler = (event) => {
@@ -32,6 +33,12 @@ function ToDo() {
 			return newTaskList;
 		});
 		setValue("");
+		setTotal(total + 1);
+	};
+
+	const clearAllTask = () => {
+		setnewTask([]);
+		setnewComplitedTask([]);
 	};
 
 	const deleteTask = (el) => {
@@ -61,16 +68,16 @@ function ToDo() {
 		<div>
 			<div className="todoContainer">
 				{newTask.length === 0 && newComplitedTask.length === 0 ? (
-					<h4>Add your first task</h4>
+					<h4 className="green">Add your first task</h4>
 				) : newTask.length === 0 && newComplitedTask.length > 0 ? (
-					<h4>All tasks completed</h4>
+					<h4 className="red">All tasks completed</h4>
 				) : (
-					<h4>{newTask.length} to complete</h4>
+					<h4 className="orange">{newTask.length} to complete</h4>
 				)}
 
 				<div className="inputContainer">
 					<Input onchange={onchangeHandler} value={value} />
-					<Button action={addTask} label="Add" />
+					<Button classname="btn" action={addTask} label="Add" />
 				</div>
 				<Output
 					label="To Do"
@@ -111,6 +118,28 @@ function ToDo() {
 					</div>
 				))}
 			></Output>
+			total: {total}
+			<div className="contain-buttons">
+				<div className="btn-container">
+					<Button
+						classname="btn"
+						label="clear todo"
+						action={() => setnewTask([])}
+					></Button>
+					<Button
+						classname="btn"
+						label="clear completed"
+						action={() => setnewComplitedTask([])}
+					></Button>
+				</div>
+				<div>
+					<Button
+						classname="btn clear-all"
+						label="clear all taks"
+						action={() => clearAllTask()}
+					></Button>
+				</div>
+			</div>
 		</div>
 	);
 }
