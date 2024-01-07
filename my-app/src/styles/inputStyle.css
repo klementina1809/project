@@ -1,11 +1,13 @@
 .outputContainer {
-	min-height: 136px;
+	height: 136px;
 	width: 248px;
 	background-color: 
   rgb(182, 196, 182);
 	border-radius: 4px;
   color: rgb(22, 48, 32);
   font-size: 14px;
+  overflow-y: auto;
+
 }
 
 input {
@@ -32,9 +34,7 @@ input {
   margin: 0px;
 }
 
-img {
-  width: 16px;
-}
+
 
 h4 {
   text-align: center;

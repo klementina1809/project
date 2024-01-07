@@ -17,29 +17,38 @@ function ToDo() {
 	const controlTask = () => {
 		console.log("newTask:", newTask);
 		console.log("newComplitedTask:", newComplitedTask);
-		
+
 		if (newTask.length === 0 && newComplitedTask.length === 0)
 			setallTask("Add new task");
 		else if (newTask.length === 0 && newComplitedTask.length > 0)
 			setallTask("All tasks completed");
 		else if (newTask.length > 0)
-			setallTask(() => ` ${newTask.length + 1} to complete`);
+			setallTask(() => ` ${newTask.length} to complete`);
 	};
 
 	const addTask = () => {
-		setnewTask((prevTask) => [...prevTask, value]);
+		setnewTask((prevTask) => {
+			const newTaskList = [...prevTask, value];
+			controlTask(newTaskList);
+			return newTaskList;
+		});
 		setValue("");
-		controlTask();
 	};
+
 	const deleteTask = (el) => {
 		const newList = newTask.filter((todo) => todo !== el);
-		setnewTask(() => newList);
-		controlTask();
+		setnewTask(() => {
+			controlTask(newList);
+			return newList;
+		});
 	};
 
 	const complete = (el) => {
 		const filteredList = newTask.filter((todo) => todo !== el);
-		setnewTask(() => filteredList);
+		setnewTask(() => {
+			controlTask(filteredList);
+			return filteredList;
+		});
 		setnewComplitedTask((prevComplitedTask) => [...prevComplitedTask, el]);
 		controlTask();
 	};
@@ -47,14 +56,23 @@ function ToDo() {
 	const uncomplete = (el) => {
 		const newList = newComplitedTask.filter((todo) => todo !== el);
 		setnewComplitedTask(() => newList);
-		setnewTask((prevTask) => [...prevTask, el]);
-		controlTask();
+		setnewTask((prevTask) => {
+			controlTask([...prevTask, el]);
+			return [...prevTask, el];
+		});
 	};
 
 	return (
 		<div>
 			<div className="todoContainer">
-				<h4>{allTask}</h4>
+				{newTask.length === 0 && newComplitedTask.length === 0 ? (
+					<h4>Add your first task</h4>
+				) : (
+					<h4>
+						{newComplitedTask.length} completed and {newTask.length}{" "}
+						to do
+					</h4>
+				)}
 				<div className="inputContainer">
 					<Input onchange={onchangeHandler} value={value} />
 					<Button action={addTask} label="Add" />
@@ -69,10 +87,12 @@ function ToDo() {
 							/>
 							<span>{el}</span>
 
-							<img
-								src="https://i.imgur.com/nwOid4Q.png"
-								onClick={() => deleteTask(el)}
-							/>
+							<div className="img-container">
+								<img
+									src="https://i.imgur.com/nwOid4Q.png"
+									onClick={() => deleteTask(el)}
+								/>
+							</div>
 						</div>
 					))}
 				>
