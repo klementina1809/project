@@ -8,44 +8,53 @@ function ToDo() {
 	const [value, setValue] = useState("");
 	const [newTask, setnewTask] = useState([]);
 	const [newComplitedTask, setnewComplitedTask] = useState([]);
-	const [allTask, setallTask] = useState('');
-
-	const addTask = () => {
-		setnewTask([...newTask, value]);
-		setValue("");
-	};
+	const [allTask, setallTask] = useState("Add new task");
 
 	const onchangeHandler = (event) => {
 		setValue(event.target.value);
 	};
 
-	const complete = (el) => {
+	const controlTask = () => {
+		console.log("newTask:", newTask);
+		console.log("newComplitedTask:", newComplitedTask);
+		
+		if (newTask.length === 0 && newComplitedTask.length === 0)
+			setallTask("Add new task");
+		else if (newTask.length === 0 && newComplitedTask.length > 0)
+			setallTask("All tasks completed");
+		else if (newTask.length > 0)
+			setallTask(() => ` ${newTask.length + 1} to complete`);
+	};
+
+	const addTask = () => {
+		setnewTask((prevTask) => [...prevTask, value]);
+		setValue("");
+		controlTask();
+	};
+	const deleteTask = (el) => {
 		const newList = newTask.filter((todo) => todo !== el);
 		setnewTask(() => newList);
-		if ([...newTask].length === 1) setallTask('All tasks completed');
-		if ([...newTask].length > 1) setallTask('');
+		controlTask();
+	};
+
+	const complete = (el) => {
+		const filteredList = newTask.filter((todo) => todo !== el);
+		setnewTask(() => filteredList);
 		setnewComplitedTask((prevComplitedTask) => [...prevComplitedTask, el]);
-		
+		controlTask();
 	};
 
 	const uncomplete = (el) => {
 		const newList = newComplitedTask.filter((todo) => todo !== el);
-		setnewComplitedTask(newList);
-		setallTask('');
+		setnewComplitedTask(() => newList);
 		setnewTask((prevTask) => [...prevTask, el]);
-	};
-
-	const deleteTask = (el) => {
-		const newList = newTask.filter((todo) => todo !== el);
-		setnewTask(newList);
-		if ([...newTask].length === 1) setallTask('All tasks completed');
-		if ([...newTask].length > 1) setallTask('');
+		controlTask();
 	};
 
 	return (
 		<div>
 			<div className="todoContainer">
-			<h4>{allTask}</h4>
+				<h4>{allTask}</h4>
 				<div className="inputContainer">
 					<Input onchange={onchangeHandler} value={value} />
 					<Button action={addTask} label="Add" />
