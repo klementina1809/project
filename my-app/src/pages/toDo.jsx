@@ -47,6 +47,14 @@ function ToDo() {
 			return newList;
 		});
 	};
+	
+	const editTask = (el) => {
+		const newList = newTask.filter((todo) => todo !== el);
+		setnewTask(() => {
+			return newList;
+		});
+		setValue(el);
+	};
 
 	const complete = (el) => {
 		const filteredList = newTask.filter((todo) => todo !== el);
@@ -90,6 +98,10 @@ function ToDo() {
 							<span>{el}</span>
 
 							<div className="img-container">
+								<img
+									src="https://cdn-icons-png.flaticon.com/512/4100/4100751.png"
+									onClick={() => editTask(el)}
+								/>
 								<img
 									src="https://i.imgur.com/nwOid4Q.png"
 									onClick={() => deleteTask(el)}
