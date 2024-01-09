@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import Output from "../components/Output";
+import ListContainer from "../components/ListContainer";
 import "../styles/todoStyle.css";
 
 function ToDo() {
@@ -10,6 +11,12 @@ function ToDo() {
 	const [newComplitedTask, setnewComplitedTask] = useState([]);
 	const [total, setTotal] = useState(0);
 	// const [allTask, setallTask] = useState("Add new task");
+
+	useEffect(() => {
+		//quando [] è vuoto viene eseguito solo una volta
+		//al render del component dentro cui è inserito
+		console.log("Render del component");
+	}, []);
 
 	const onchangeHandler = (event) => {
 		setValue(event.target.value);
@@ -47,7 +54,7 @@ function ToDo() {
 			return newList;
 		});
 	};
-	
+
 	const editTask = (el) => {
 		const newList = newTask.filter((todo) => todo !== el);
 		setnewTask(() => {
@@ -74,6 +81,25 @@ function ToDo() {
 
 	return (
 		<div>
+			<div>
+				<h1>-- Inizio nuovo codice --</h1>
+				<ListContainer
+					tasks={newTask}
+					label="To Do"
+					checked={false}
+					action={complete}
+					//onChange={...}
+					//onEdit={...}
+					//onDelete={...}
+				/>
+				<ListContainer
+					tasks={newComplitedTask}
+					label="Completed"
+					checked={true}
+					action={uncomplete}
+				/>
+				<h1>-- Fine nuovo codice --</h1>
+			</div>
 			<div className="todoContainer">
 				{newTask.length === 0 && newComplitedTask.length === 0 ? (
 					<h4 className="green">Add your first task</h4>
@@ -91,10 +117,7 @@ function ToDo() {
 					label="To Do"
 					value={newTask.map((el) => (
 						<div className="inputChekbox">
-							<input
-								type="checkbox"
-								onChange={() => complete(el)}
-							/>
+							<input type="checkbox" onChange={() => complete(el)} />
 							<span>{el}</span>
 
 							<div className="img-container">
@@ -109,9 +132,7 @@ function ToDo() {
 							</div>
 						</div>
 					))}
-				>
-					{" "}
-				</Output>
+				/>
 			</div>
 			<Output
 				label="Completed"
