@@ -1,41 +1,35 @@
 .outputContainer {
 	height: 136px;
-	width: 248px;
-	background-color: 
-  rgb(182, 196, 182);
+	/* width: 248px; */
+	background-color: rgb(182, 196, 182);
 	border-radius: 4px;
-  color: rgb(22, 48, 32);
-  font-size: 14px;
-  overflow-y: auto;
-
+	color: rgb(22, 48, 32);
+	font-size: 14px;
+	overflow-y: auto;
 }
 
 input {
 	border-radius: 4px;
 	background-color: rgb(238, 240, 229);
 	height: 36px;
-  color: rgb(22, 48, 32);
+	color: rgb(22, 48, 32);
 }
 
-  input[type = "text"] {
-    padding-left: 5px;
-  }
-  
+input[type="text"] {
+	padding-left: 5px;
+}
 
 .inputContainer {
- padding: 5px 0px;
- display: flex;
-
+	padding: 5px 0px;
+	display: flex;
 }
 
 .inputChekbox {
-  display: flex;
-  align-items: center;
-  margin: 0px;
+	display: flex;
+	align-items: center;
+	margin: 0px;
 }
 
-
-
 h4 {
-  text-align: center;
+	text-align: center;
 }
