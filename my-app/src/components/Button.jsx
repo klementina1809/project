@@ -2,11 +2,11 @@ import React from "react";
 import "../styles/btnStyle.css";
 
 function Button(props) {
-	const { action, label, classname  } = props;
+	const { onClick, label, classname  } = props;
 
 	return (
 		<>
-			<button onClick={action} className={classname}>
+			<button onClick={onClick} className={classname}>
 				{label}
 			</button>
 		</>

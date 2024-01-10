@@ -1,29 +1,32 @@
-
 .todoContainer {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 del {
-  color: rgb(22, 48, 32);
+	color: rgb(22, 48, 32);
 }
 
 .img-container {
-  flex: 1;
-  text-align: end;
-  padding-right: 8px;
+	flex: 1;
+	text-align: end;
+	padding-right: 8px;
 }
 
-.img-container img{
- 
-  width: 16px;
+.img-container img {
+	width: 16px;
 }
 
 .green {
-  color: green;
+	color: green;
 }
 .orange {
-  color: orange;
+	color: orange;
 }
 .red {
-  color: red;
+	color: red;
+}
+
+.align-center {
+	justify-content: center !important;
+	text-align: center;
 }
