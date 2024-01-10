@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import "../styles/inputStyle.css";
-import { FaTrash, FaPen } from "react-icons/fa";
+import { FaTrash, FaPen, FaCopy } from "react-icons/fa";
 
 function SingleTask(props) {
-	const { checked, name, onCheck, onDelete, onEdit } = props;
+	const { checked, name, onCheck, onDelete, onEdit,  onCopy } = props;
 
 	useEffect(() => {
-		console.log("Single task rendered", checked, name);
+		console.log("onCheck", onCheck);
 	}, []);
 
 	return (
@@ -17,20 +17,29 @@ function SingleTask(props) {
 				checked={checked}
 			/>
 			<span>{name}</span>
-			<div className="img-container">
-				<FaPen
-					color="#304d30"
-					size={18}
-					style={{ marginRight: "10px", cursor: "pointer" }}
-					onClick={() => onEdit(name)}
-				/>
-				<FaTrash
-					color="#304d30"
-					size={18}
-					style={{ cursor: "pointer" }}
-					onClick={() => onDelete(name)}
-				/>
-			</div>
+
+			{!checked && (
+				<div className="img-container">
+					<FaPen
+						color="#304d30"
+						size={18}
+						style={{ marginRight: "10px", cursor: "pointer" }}
+						onClick={() => onEdit(name)}
+					/>
+					<FaCopy
+						color="#304d30"
+						size={18}
+						style={{ marginRight: "10px", cursor: "pointer" }}
+						onClick={() => onCopy(name)}
+					></FaCopy>
+					<FaTrash
+						color="#304d30"
+						size={18}
+						style={{ cursor: "pointer" }}
+						onClick={() => onDelete(name)}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

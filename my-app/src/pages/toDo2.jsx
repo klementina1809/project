@@ -39,6 +39,9 @@ function ToDo2() {
 			return newList;
 		});
 	};
+	const copyTask = (el) => {
+		setnewTask(() => [...newTask, el+'(2)'])
+	};
 
 	const editTask = (el) => {
 		const newList = newTask.filter((todo) => todo !== el);
@@ -87,9 +90,10 @@ function ToDo2() {
 						tasks={newTask}
 						label="To Do"
 						checked={false}
-						onChek={complete}
+						onCheck={complete}
 						onEdit={editTask}
 						onDelete={deleteTask}
+						onCopy={copyTask}
 					/>
 				</Col>
 			</Row>
@@ -100,7 +104,7 @@ function ToDo2() {
 						tasks={newComplitedTask}
 						label="Completed"
 						checked={true}
-						onChek={uncomplete}
+						onCheck={uncomplete}
 						
 					/>
 				</Col>
