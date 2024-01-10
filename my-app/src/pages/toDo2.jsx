@@ -15,6 +15,20 @@ function ToDo2() {
 	const [newComplitedTask, setnewComplitedTask] = useState([]);
 	const [total, setTotal] = useState(0);
 
+	const handleTaskAction = (action, el) => {
+		switch (action) {
+			case "delete":
+				deleteTask(el);
+				break;
+			case "copy":
+				copyTask(el);
+				break;
+			case "edit":
+				editTask(el);
+				break;
+		}
+	};
+
 	const onchangeHandler = (event) => {
 		setValue(event.target.value);
 	};
@@ -40,7 +54,7 @@ function ToDo2() {
 		});
 	};
 	const copyTask = (el) => {
-		setnewTask(() => [...newTask, el+'(2)'])
+		setnewTask(() => [...newTask, el + " (2)"]);
 	};
 
 	const editTask = (el) => {
@@ -91,9 +105,10 @@ function ToDo2() {
 						label="To Do"
 						checked={false}
 						onCheck={complete}
-						onEdit={editTask}
-						onDelete={deleteTask}
-						onCopy={copyTask}
+						// onEdit={editTask}
+						// onDelete={deleteTask}
+						// onCopy={copyTask}
+						action={handleTaskAction}
 					/>
 				</Col>
 			</Row>
@@ -105,7 +120,6 @@ function ToDo2() {
 						label="Completed"
 						checked={true}
 						onCheck={uncomplete}
-						
 					/>
 				</Col>
 			</Row>

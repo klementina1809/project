@@ -5,7 +5,7 @@ import "../styles/inputStyle.css";
 import { Row, Col } from "react-grid-system";
 
 function ListContainer(props) {
-	const { tasks, label, checked, onCheck, onDelete, onEdit,  onCopy } = props;
+	const { tasks, label, checked, onCheck,  action } = props;
 
 	return (
 		<>
@@ -17,7 +17,7 @@ function ListContainer(props) {
 
 			<Row>
 				<Col sm={12}>
-					<TaskContainer tasks={tasks} checked={checked} onCheck={onCheck} onDelete={onDelete} onEdit={onEdit}  onCopy={onCopy} />
+					<TaskContainer tasks={tasks} checked={checked} onCheck={onCheck}  action={action} />
 				</Col>
 			</Row>
 		</>

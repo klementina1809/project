@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import SingleTask from "./SingleTask";
 
 function TaskContainer(props) {
-	const { tasks, checked, onCheck, onDelete, onEdit,  onCopy } = props;
+	const { tasks, checked, onCheck,  action } = props;
 
 	return (
 		<div className="outputContainer">
@@ -12,9 +12,10 @@ function TaskContainer(props) {
 						name={task}
 						checked={checked}
 						onCheck={onCheck} 
-						onDelete={onDelete} 
-						onEdit={onEdit}
-						onCopy={onCopy}
+						// onDelete={onDelete} 
+						// onEdit={onEdit}
+						// onCopy={onCopy}
+						action={action}
 						key={index}
 					/>
 				);

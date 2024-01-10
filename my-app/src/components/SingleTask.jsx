@@ -3,7 +3,7 @@ import "../styles/inputStyle.css";
 import { FaTrash, FaPen, FaCopy } from "react-icons/fa";
 
 function SingleTask(props) {
-	const { checked, name, onCheck, onDelete, onEdit,  onCopy } = props;
+	const { checked, name, onCheck, onDelete, onEdit, onCopy, action } = props;
 
 	useEffect(() => {
 		console.log("onCheck", onCheck);
@@ -24,19 +24,19 @@ function SingleTask(props) {
 						color="#304d30"
 						size={18}
 						style={{ marginRight: "10px", cursor: "pointer" }}
-						onClick={() => onEdit(name)}
+						onClick={() => action("edit", name)}
 					/>
 					<FaCopy
 						color="#304d30"
 						size={18}
 						style={{ marginRight: "10px", cursor: "pointer" }}
-						onClick={() => onCopy(name)}
+						onClick={() => action("copy", name)}
 					></FaCopy>
 					<FaTrash
 						color="#304d30"
 						size={18}
 						style={{ cursor: "pointer" }}
-						onClick={() => onDelete(name)}
+						onClick={() => action("delete", name)}
 					/>
 				</div>
 			)}
