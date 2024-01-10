@@ -5,15 +5,14 @@ import "../styles/todoStyle.css";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
-import Output from "../components/Output";
 import ListContainer from "../components/ListContainer";
 import Comment from "../components/Comment";
 
 function ToDo2() {
 	const [value, setValue] = useState("");
-	const [newTask, setnewTask] = useState([]);
-	const [newComplitedTask, setnewComplitedTask] = useState([]);
-	const [total, setTotal] = useState(0);
+	const [tasks, setTasks] = useState([]);
+	const [tasksCompleted, setTasksCompleted] = useState([]);
+	const [taskNextId, setTaskNextId] = useState(0);
 
 	const handleTaskAction = (action, el) => {
 		switch (action) {
@@ -34,52 +33,66 @@ function ToDo2() {
 	};
 
 	const addTask = () => {
-		setnewTask((prevTask) => {
-			const newTaskList = [...prevTask, value];
-			return newTaskList;
-		});
+		const task = {
+			id: taskNextId,
+			name: value,
+		};
+		setTasks([...tasks, task]);
 		setValue("");
-		setTotal(total + 1);
+		setTaskNextId(taskNextId + 1);
 	};
 
 	const clearAllTask = () => {
-		setnewTask([]);
-		setnewComplitedTask([]);
+		setTasks([]);
+		setTasksCompleted([]);
 	};
 
 	const deleteTask = (el) => {
-		const newList = newTask.filter((todo) => todo !== el);
-		setnewTask(() => {
-			return newList;
+		const filteredList = tasks.filter((task) => task.id !== el.id);
+		setTasks(() => {
+			return filteredList;
 		});
-	};
-	const copyTask = (el) => {
-		setnewTask(() => [...newTask, el + " (2)"]);
 	};
 
+	const copyTask = (el) => {
+		const task = {
+			id: taskNextId,
+			name: el.name + " (2)",
+		};
+		setTaskNextId(taskNextId + 1); //???
+		setTasks(() => [...tasks, task]); // mi crea string con (2) ma non fa vedere
+	};
+
+	useEffect(() => {
+		console.log("-----", tasks);
+	}, [copyTask]);
+
 	const editTask = (el) => {
-		const newList = newTask.filter((todo) => todo !== el);
-		setnewTask(() => {
-			return newList;
+		const filteredList = tasks.filter((task) => task.id !== el.id);
+		setTasks(() => {
+			return filteredList;
 		});
-		setValue(el);
-		setTotal(total - 1);
+		setValue(el.name);
 	};
 
 	const complete = (el) => {
-		const filteredList = newTask.filter((todo) => todo !== el);
-		setnewTask(() => {
+		const filteredList = tasks.filter((task) => task.id !== el.id);
+		setTasks(() => {
 			return filteredList;
 		});
-		setnewComplitedTask((prevComplitedTask) => [...prevComplitedTask, el]);
+		setTasksCompleted([...tasksCompleted, el]);
 	};
 
 	const uncomplete = (el) => {
-		const newList = newComplitedTask.filter((todo) => todo !== el);
-		setnewComplitedTask(() => newList);
-		setnewTask((prevTask) => {
-			return [...prevTask, el];
-		});
+		const filteredList = tasksCompleted.filter((task) => task.id !== el.id);
+		setTasksCompleted(() => filteredList);
+		setTasks([...tasks, el]);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			addTask();
+		}
 	};
 
 	return (
@@ -87,21 +100,25 @@ function ToDo2() {
 			<Row className="align-center">
 				<Col sm={6}>
 					<Comment
-						tasksNumber={newTask.length}
-						completedTasksNumber={newComplitedTask.length}
+						tasksNumber={tasks.length}
+						completedTasksNumber={tasksCompleted.length}
 					/>
 				</Col>
 			</Row>
 			<Row className="align-center">
 				<Col sm={7}>
-					<Input onchange={onchangeHandler} value={value} />
+					<Input
+						onchange={onchangeHandler}
+						value={value}
+						onKeyDown={handleKeyPress}
+					/>
 					<Button classname="btn" onClick={addTask} label="Add" />
 				</Col>
 			</Row>
 			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
-						tasks={newTask}
+						tasks={tasks}
 						label="To Do"
 						checked={false}
 						onCheck={complete}
@@ -116,7 +133,7 @@ function ToDo2() {
 			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
-						tasks={newComplitedTask}
+						tasks={tasksCompleted}
 						label="Completed"
 						checked={true}
 						onCheck={uncomplete}

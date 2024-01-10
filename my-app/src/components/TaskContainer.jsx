@@ -2,21 +2,21 @@ import React, { useEffect } from "react";
 import SingleTask from "./SingleTask";
 
 function TaskContainer(props) {
-	const { tasks, checked, onCheck,  action } = props;
+	const { tasks, checked, onCheck, action } = props;
 
 	return (
 		<div className="outputContainer">
-			{tasks.map((task, index) => {
+			{tasks.map((task) => {
 				return (
 					<SingleTask
-						name={task}
+						task={task}
 						checked={checked}
-						onCheck={onCheck} 
-						// onDelete={onDelete} 
+						onCheck={onCheck}
+						// onDelete={onDelete}
 						// onEdit={onEdit}
 						// onCopy={onCopy}
 						action={action}
-						key={index}
+						key={task.id}
 					/>
 				);
 			})}
