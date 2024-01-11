@@ -23,3 +23,12 @@
 .clear-all {
 	width: 100%;
 }
+
+.clear {
+	width: 100%;
+	margin: 0;
+}
+
+.mt-10{
+	margin-top: 10px;
+}

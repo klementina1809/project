@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/btnStyle.css";
 
 function Button(props) {
-	const { onClick, label, classname  } = props;
+	const { onClick, label, classname } = props;
 
 	return (
 		<>

@@ -178,27 +178,27 @@ function ToDo() {
 		// 		))}
 		// 	></Output>
 		// 	total: {total}
-		// 	<div className="contain-buttons">
-		// 		<div className="btn-container">
-		// 			<Button
-		// 				classname="btn"
-		// 				label="clear todo"
-		// 				action={() => setTasks([])}
-		// 			></Button>
-		// 			<Button
-		// 				classname="btn"
-		// 				label="clear completed"
-		// 				action={() => setTasksCompleted([])}
-		// 			></Button>
-		// 		</div>
-		// 		<div>
-		// 			<Button
-		// 				classname="btn clear-all"
-		// 				label="clear all taks"
-		// 				action={() => clearAllTask()}
-		// 			></Button>
-		// 		</div>
-		// 	</div>
+			// <div className="contain-buttons">
+			// 	<div className="btn-container">
+			// 		<Button
+			// 			classname="btn"
+			// 			label="clear todo"
+			// 			action={() => setTasks([])}
+			// 		></Button>
+			// 		<Button
+			// 			classname="btn"
+			// 			label="clear completed"
+			// 			action={() => setTasksCompleted([])}
+			// 		></Button>
+			// 	</div>
+			// 	<div>
+			// 		<Button
+			// 			classname="btn clear-all"
+			// 			label="clear all taks"
+			// 			action={() => clearAllTask()}
+			// 		></Button>
+			// 	</div>
+			// </div>
 		// </div>
 	);
 }

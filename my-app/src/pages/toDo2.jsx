@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-grid-system";
 
 import "../styles/todoStyle.css";
+import "../styles/btnStyle.css";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
@@ -13,6 +14,21 @@ function ToDo2() {
 	const [tasks, setTasks] = useState([]);
 	const [tasksCompleted, setTasksCompleted] = useState([]);
 	const [taskNextId, setTaskNextId] = useState(0);
+	const [categories, setCategories] = useState([{
+		id: 0,
+		name: 'Personal',
+		color: 'green'
+	},
+	{
+		id: 1,
+		name: 'Work',
+		color: 'orange'
+	},
+	{
+		id: 3,
+		name: 'Other',
+		color: 'yellow'
+	}]);
 
 	const handleTaskAction = (action, el) => {
 		switch (action) {
@@ -59,13 +75,13 @@ function ToDo2() {
 			id: taskNextId,
 			name: el.name + " (2)",
 		};
-		setTaskNextId(taskNextId + 1); //???
-		setTasks(() => [...tasks, task]); // mi crea string con (2) ma non fa vedere
+		setTaskNextId(taskNextId + 1);
+		setTasks(() => [...tasks, task]);
 	};
 
-	useEffect(() => {
-		console.log("-----", tasks);
-	}, [copyTask]);
+	// useEffect(() => {
+	// 	console.log("-----", tasks);
+	// }, [copyTask]);
 
 	const editTask = (el) => {
 		const filteredList = tasks.filter((task) => task.id !== el.id);
@@ -95,6 +111,10 @@ function ToDo2() {
 		}
 	};
 
+	const selectChange = (e) => {
+		console.log(e.target.value);
+	};
+
 	return (
 		<Container>
 			<Row className="align-center">
@@ -112,6 +132,14 @@ function ToDo2() {
 						value={value}
 						onKeyDown={handleKeyPress}
 					/>
+					<select
+						onChange={selectChange}
+						name="test"
+						id="test"
+					>
+						<option value="1">1 </option>
+						<option value="2">2</option>
+					</select>
 					<Button classname="btn" onClick={addTask} label="Add" />
 				</Col>
 			</Row>
@@ -137,6 +165,31 @@ function ToDo2() {
 						label="Completed"
 						checked={true}
 						onCheck={uncomplete}
+					/>
+				</Col>
+			</Row>
+			<Row className="align-center mt-10">
+				<Col sm={6}>
+					<Button
+						classname="btn clear-all"
+						label="clear all taks"
+						onClick={() => clearAllTask()}
+					/>
+				</Col>
+			</Row>
+			<Row className="align-center mt-10">
+				<Col sm={3}>
+					<Button
+						classname="btn clear"
+						label="clear todo"
+						onClick={() => setTasks([])}
+					/>
+				</Col>
+				<Col sm={3}>
+					<Button
+						classname="btn clear"
+						label="clear completed"
+						onClick={() => setTasksCompleted([])}
 					/>
 				</Col>
 			</Row>

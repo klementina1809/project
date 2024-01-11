@@ -3,7 +3,7 @@ import "../styles/inputStyle.css";
 import { FaTrash, FaPen, FaCopy } from "react-icons/fa";
 
 function SingleTask(props) {
-	const { checked, task, onCheck, action, key } = props; //key non mi serve? certo posso fare inpo pi pulito ma per cosa serve
+	const { checked, task, onCheck, action} = props; //key non mi serve? certo posso fare inpo pi pulito ma per cosa serve
 
 	// useEffect(() => {
 	// 	console.log("id", key);
