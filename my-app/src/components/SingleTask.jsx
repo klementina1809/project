@@ -17,6 +17,7 @@ function SingleTask(props) {
 				checked={checked}
 			/>
 			<span>{task.name}</span>
+			<span className="">  ---  </span>
 
 			{!checked && (
 				<div className="img-container">

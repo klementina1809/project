@@ -3,32 +3,38 @@ import { Container, Row, Col } from "react-grid-system";
 
 import "../styles/todoStyle.css";
 import "../styles/btnStyle.css";
+import "../styles/inputStyle.css";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
 import ListContainer from "../components/ListContainer";
 import Comment from "../components/Comment";
+import Select from "../components/Select";
 
 function ToDo2() {
 	const [value, setValue] = useState("");
 	const [tasks, setTasks] = useState([]);
 	const [tasksCompleted, setTasksCompleted] = useState([]);
 	const [taskNextId, setTaskNextId] = useState(0);
-	const [categories, setCategories] = useState([{
-		id: 0,
-		name: 'Personal',
-		color: 'green'
-	},
-	{
-		id: 1,
-		name: 'Work',
-		color: 'orange'
-	},
-	{
-		id: 3,
-		name: 'Other',
-		color: 'yellow'
-	}]);
+
+	const [categories, setCategories] = useState([
+		{
+			id: 0,
+			name: "Personal",
+			color: "green",
+		},
+		{
+			id: 1,
+			name: "Work",
+			color: "orange",
+		},
+		{
+			id: 2,
+			name: "Other",
+			color: "yellow",
+		},
+	]);
+	const [categorySelected, setCategorySelected] = useState(0);
 
 	const handleTaskAction = (action, el) => {
 		switch (action) {
@@ -44,19 +50,28 @@ function ToDo2() {
 		}
 	};
 
-	const onchangeHandler = (event) => {
-		setValue(event.target.value);
+	const selectChange = (e) => {
+		setCategorySelected(e.target.value);
+	};
+
+	const onchangeHandler = (e) => {
+		setValue(e.target.value);
 	};
 
 	const addTask = () => {
 		const task = {
 			id: taskNextId,
 			name: value,
+			category: +categorySelected,
 		};
 		setTasks([...tasks, task]);
 		setValue("");
 		setTaskNextId(taskNextId + 1);
 	};
+
+	useEffect(() => {
+		console.log("-----", tasks);
+	}, [tasks]);
 
 	const clearAllTask = () => {
 		setTasks([]);
@@ -78,10 +93,6 @@ function ToDo2() {
 		setTaskNextId(taskNextId + 1);
 		setTasks(() => [...tasks, task]);
 	};
-
-	// useEffect(() => {
-	// 	console.log("-----", tasks);
-	// }, [copyTask]);
 
 	const editTask = (el) => {
 		const filteredList = tasks.filter((task) => task.id !== el.id);
@@ -111,10 +122,6 @@ function ToDo2() {
 		}
 	};
 
-	const selectChange = (e) => {
-		console.log(e.target.value);
-	};
-
 	return (
 		<Container>
 			<Row className="align-center">
@@ -126,20 +133,19 @@ function ToDo2() {
 				</Col>
 			</Row>
 			<Row className="align-center">
-				<Col sm={7}>
+				<Col sm={4} className="input-container">
 					<Input
 						onchange={onchangeHandler}
 						value={value}
 						onKeyDown={handleKeyPress}
 					/>
-					<select
+
+					<Select
 						onChange={selectChange}
-						name="test"
-						id="test"
-					>
-						<option value="1">1 </option>
-						<option value="2">2</option>
-					</select>
+						data={categories}
+						selectedItem={categorySelected}
+					/>
+
 					<Button classname="btn" onClick={addTask} label="Add" />
 				</Col>
 			</Row>
