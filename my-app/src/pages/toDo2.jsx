@@ -21,17 +21,17 @@ function ToDo2() {
 		{
 			id: 0,
 			name: "Personal",
-			color: "green",
+			color: "#4F6F52",
 		},
 		{
 			id: 1,
 			name: "Work",
-			color: "orange",
+			color: "#739072",
 		},
 		{
 			id: 2,
 			name: "Other",
-			color: "yellow",
+			color: "#86A789",
 		},
 	]);
 	const [categorySelected, setCategorySelected] = useState(0);
@@ -59,10 +59,14 @@ function ToDo2() {
 	};
 
 	const addTask = () => {
+		const category = categories.find(
+			(category) => category.id === +categorySelected
+		);
+		console.log(categorySelected);
 		const task = {
 			id: taskNextId,
 			name: value,
-			category: +categorySelected,
+			category: category,
 		};
 		setTasks([...tasks, task]);
 		setValue("");

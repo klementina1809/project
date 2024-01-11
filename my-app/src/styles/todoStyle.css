@@ -16,13 +16,13 @@ del {
 	width: 16px;
 }
 
-.green {
+h4.green {
 	color: green;
 }
-.orange {
+h4.orange {
 	color: orange;
 }
-.red {
+h4.red {
 	color: red;
 }
 

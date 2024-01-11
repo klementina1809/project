@@ -3,7 +3,7 @@ import "../styles/inputStyle.css";
 import { FaTrash, FaPen, FaCopy } from "react-icons/fa";
 
 function SingleTask(props) {
-	const { checked, task, onCheck, action} = props; //key non mi serve? certo posso fare inpo pi pulito ma per cosa serve
+	const { checked, task, onCheck, action } = props; //key non mi serve? certo posso fare inpo pi pulito ma per cosa serve
 
 	// useEffect(() => {
 	// 	console.log("id", key);
@@ -16,8 +16,14 @@ function SingleTask(props) {
 				onChange={() => onCheck(task)}
 				checked={checked}
 			/>
-			<span>{task.name}</span>
-			<span className="">  ---  </span>
+			<span>{task.name} </span>
+			<span
+				className="circle"
+				style={{
+					backgroundColor: task.category.color,
+					color: task.category.color,
+				}}
+			></span>
 
 			{!checked && (
 				<div className="img-container">

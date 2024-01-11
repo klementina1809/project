@@ -22,7 +22,6 @@ input[type="text"] {
 .input-container {
 	padding: 5px 0px;
 	display: flex;
-	
 }
 
 .inputChekbox {
@@ -33,4 +32,11 @@ input[type="text"] {
 
 h4 {
 	text-align: center;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+	margin-left: 5px;
 }
