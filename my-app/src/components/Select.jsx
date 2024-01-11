@@ -1,12 +1,12 @@
 function Select(props) {
-	const { onChange, data, selectedItem } = props;
+	const { name, onChange, data, selectedItem } = props;
 
 	return (
-		<select onChange={onChange} name="category" id="category" value={selectedItem}>
-			{data.map((category) => {
+		<select onChange={onChange} name={name} id={name} value={selectedItem}>
+			{data.map((el) => {
 				return (
-					<option value={category.id} key={category.id}>
-						{category.name}
+					<option value={el.id} key={el.id}>
+						{el.name}
 					</option>
 				);
 			})}

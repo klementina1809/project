@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-grid-system";
+import { NavLink } from "react-router-dom";
 
 import "../styles/todoStyle.css";
 import "../styles/btnStyle.css";
@@ -128,6 +129,13 @@ function ToDo2() {
 
 	return (
 		<Container>
+			<Row>
+				<Col sm={12}>
+					<NavLink to="/test" className="...">
+						TEST TESTO DA SCRIVERE
+					</NavLink>
+				</Col>
+			</Row>
 			<Row className="align-center">
 				<Col sm={6}>
 					<Comment
@@ -143,13 +151,12 @@ function ToDo2() {
 						value={value}
 						onKeyDown={handleKeyPress}
 					/>
-
 					<Select
+						name="category"
 						onChange={selectChange}
 						data={categories}
 						selectedItem={categorySelected}
 					/>
-
 					<Button classname="btn" onClick={addTask} label="Add" />
 				</Col>
 			</Row>
