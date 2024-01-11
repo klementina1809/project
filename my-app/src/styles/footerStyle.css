@@ -1,0 +1,21 @@
+ul.footer {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	gap: 40px;
+
+	list-style-type: none;
+
+	margin: auto;
+	padding: 0px;
+	border-radius: 4px;
+	height: 36px;
+
+	background-color: #3b3b3b;;
+  margin-top: 50px;
+}
+
+ul.footer a {
+	font-weight: 700;
+	color: #ffedfe;
+}

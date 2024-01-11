@@ -1,32 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-grid-system";
-import { FaTrash, FaPen } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 import "../styles/todoStyle.css";
+import "../styles/btnStyle.css";
+import "../styles/inputStyle.css";
 
 import Input from "../components/Input";
 import Button from "../components/Button";
-import Output from "../components/Output";
 import ListContainer from "../components/ListContainer";
+import Comment from "../components/Comment";
+import Select from "../components/Select";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 function ToDo() {
 	const [value, setValue] = useState("");
 	const [tasks, setTasks] = useState([]);
 	const [tasksCompleted, setTasksCompleted] = useState([]);
-	const [total, setTotal] = useState(0);
+	const [taskNextId, setTaskNextId] = useState(0);
 
-	const onchangeHandler = (event) => {
-		setValue(event.target.value);
+	const [categories, setCategories] = useState([
+		{
+			id: 0,
+			name: "Personal",
+			color: "#D61355",
+		},
+		{
+			id: 1,
+			name: "Work",
+			color: "#F94A29",
+		},
+		{
+			id: 2,
+			name: "Other",
+			color: "#30E3DF",
+		},
+	]);
+	const [categorySelected, setCategorySelected] = useState(0);
+
+	const handleTaskAction = (action, el) => {
+		switch (action) {
+			case "delete":
+				deleteTask(el);
+				break;
+			case "copy":
+				copyTask(el);
+				break;
+			case "edit":
+				editTask(el);
+				break;
+		}
+	};
+
+	const selectChange = (e) => {
+		setCategorySelected(e.target.value);
+	};
+
+	const onchangeHandler = (e) => {
+		setValue(e.target.value);
 	};
 
 	const addTask = () => {
-		setTasks((prevTask) => {
-			const newTaskList = [...prevTask, value];
-			return newTaskList;
-		});
+		const category = categories.find(
+			(category) => category.id === +categorySelected
+		);
+		console.log(categorySelected);
+		const task = {
+			id: taskNextId,
+			name: value,
+			category: category,
+		};
+		setTasks([...tasks, task]);
 		setValue("");
-		setTotal(total + 1);
+		setTaskNextId(taskNextId + 1);
 	};
+
+	useEffect(() => {
+		console.log("-----", tasks);
+	}, [tasks]);
 
 	const clearAllTask = () => {
 		setTasks([]);
@@ -34,172 +86,128 @@ function ToDo() {
 	};
 
 	const deleteTask = (el) => {
-		const newList = tasks.filter((todo) => todo !== el);
-		setTasks(() => {
-			return newList;
-		});
-	};
-
-	const editTask = (el) => {
-		const newList = tasks.filter((todo) => todo !== el);
-		setTasks(() => {
-			return newList;
-		});
-		setValue(el);
-		setTotal(total - 1);
-	};
-
-	const complete = (el) => {
-		const filteredList = tasks.filter((todo) => todo !== el);
+		const filteredList = tasks.filter((task) => task.id !== el.id);
 		setTasks(() => {
 			return filteredList;
 		});
-		setTasksCompleted((prevComplitedTask) => [...prevComplitedTask, el]);
+	};
+
+	const copyTask = (el) => {
+		const task = {
+			id: taskNextId,
+			name: el.name + " (2)",
+		};
+		setTaskNextId(taskNextId + 1);
+		setTasks(() => [...tasks, task]);
+	};
+
+	const editTask = (el) => {
+		const filteredList = tasks.filter((task) => task.id !== el.id);
+		setTasks(() => {
+			return filteredList;
+		});
+		setValue(el.name);
+	};
+
+	const complete = (el) => {
+		const filteredList = tasks.filter((task) => task.id !== el.id);
+		setTasks(() => {
+			return filteredList;
+		});
+		setTasksCompleted([...tasksCompleted, el]);
 	};
 
 	const uncomplete = (el) => {
-		const newList = tasksCompleted.filter((todo) => todo !== el);
-		setTasksCompleted(() => newList);
-		setTasks((prevTask) => {
-			return [...prevTask, el];
-		});
+		const filteredList = tasksCompleted.filter((task) => task.id !== el.id);
+		setTasksCompleted(() => filteredList);
+		setTasks([...tasks, el]);
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === "Enter") {
+			addTask();
+		}
 	};
 
 	return (
 		<Container>
-			<Row>
-				<Col sm={3}></Col>
+			<Header />
+			<Row className="align-center">
 				<Col sm={6}>
-					<h1>TITOLO</h1>
+					<Comment
+						tasksNumber={tasks.length}
+						completedTasksNumber={tasksCompleted.length}
+					/>
 				</Col>
 			</Row>
-
-			<Row>
-				<Col sm={3}></Col>
+			<Row className="align-center">
+				<Col sm={4} className="input-container">
+					<Input
+						onchange={onchangeHandler}
+						value={value}
+						onKeyDown={handleKeyPress}
+					/>
+					<Select
+						name="category"
+						onChange={selectChange}
+						data={categories}
+						selectedItem={categorySelected}
+					/>
+					<Button classname="btn" onClick={addTask} label="Add" />
+				</Col>
+			</Row>
+			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
 						tasks={tasks}
 						label="To Do"
 						checked={false}
-						action={complete}
-						//onChange={...}
-						//onEdit={...}
-						//onDelete={...}
+						onCheck={complete}
+						// onEdit={editTask}
+						// onDelete={deleteTask}
+						// onCopy={copyTask}
+						action={handleTaskAction}
 					/>
 				</Col>
 			</Row>
 
-			<Row>
-				<Col sm={3}></Col>
+			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
 						tasks={tasksCompleted}
 						label="Completed"
 						checked={true}
-						action={uncomplete}
+						onCheck={uncomplete}
 					/>
 				</Col>
 			</Row>
+			<Row className="align-center mt-10">
+				<Col sm={6}>
+					<Button
+						classname="btn clear-all"
+						label="clear all taks"
+						onClick={() => clearAllTask()}
+					/>
+				</Col>
+			</Row>
+			<Row className="align-center mt-10">
+				<Col sm={3}>
+					<Button
+						classname="btn clear"
+						label="clear todo"
+						onClick={() => setTasks([])}
+					/>
+				</Col>
+				<Col sm={3}>
+					<Button
+						classname="btn clear"
+						label="clear completed"
+						onClick={() => setTasksCompleted([])}
+					/>
+				</Col>
+			</Row>
+			<Footer/>
 		</Container>
-
-		// <div>
-		// 	<div>
-		// 		<h3>-- Inizio nuovo codice --</h3>
-		// 		<ListContainer
-		// 			tasks={tasks}
-		// 			label="To Do"
-		// 			checked={false}
-		// 			action={complete}
-		// 			//onChange={...}
-		// 			//onEdit={...}
-		// 			//onDelete={...}
-		// 		/>
-		// 		<ListContainer
-		// 			tasks={tasksCompleted}
-		// 			label="Completed"
-		// 			checked={true}
-		// 			action={uncomplete}
-		// 		/>
-		// 		<h3>-- Fine nuovo codice --</h3>
-		// 	</div>
-		// <div className="todoContainer">
-		// 	{tasks.length === 0 && tasksCompleted.length === 0 ? (
-		// 		<h4 className="green">Add your first task</h4>
-		// 	) : tasks.length === 0 && tasksCompleted.length > 0 ? (
-		// 		<h4 className="red">All tasks completed</h4>
-		// 	) : (
-		// 		<h4 className="orange">{tasks.length} to complete</h4>
-		// 	)}
-
-		// 		<div className="inputContainer">
-		// 			<Input onchange={onchangeHandler} value={value} />
-		// 			<Button classname="btn" action={addTask} label="Add" />
-		// 		</div>
-		// 		<Output
-		// 			label="To Do"
-		// 			value={tasks.map((el) => (
-		// 				<div className="inputChekbox">
-		// 					<input type="checkbox" onChange={() => complete(el)} />
-		// 					<span>{el}</span>
-
-		// 					<div className="img-container">
-		// 						<FaPen
-		// 							color="#304d30"
-		// 							size={24}
-		// 							style={{ marginRight: "10px", cursor: "pointer" }}
-		// 							onClick={() => editTask(el)}
-		// 						/>
-		// 						<FaTrash
-		// 							color="#304d30"
-		// 							size={24}
-		// 							style={{ cursor: "pointer" }}
-		// 							onClick={() => deleteTask(el)}
-		// 						/>
-		// 					</div>
-		// 				</div>
-		// 			))}
-		// 		/>
-		// 	</div>
-		// 	<Output
-		// 		label="Completed"
-		// 		value={tasksCompleted.map((el) => (
-		// 			<div className="inputChekbox">
-		// 				<input
-		// 					type="checkbox"
-		// 					name="task"
-		// 					checked
-		// 					onChange={() => uncomplete(el)}
-		// 				/>
-		// 				<span>
-		// 					{" "}
-		// 					<del>{el}</del>{" "}
-		// 				</span>
-		// 			</div>
-		// 		))}
-		// 	></Output>
-		// 	total: {total}
-			// <div className="contain-buttons">
-			// 	<div className="btn-container">
-			// 		<Button
-			// 			classname="btn"
-			// 			label="clear todo"
-			// 			action={() => setTasks([])}
-			// 		></Button>
-			// 		<Button
-			// 			classname="btn"
-			// 			label="clear completed"
-			// 			action={() => setTasksCompleted([])}
-			// 		></Button>
-			// 	</div>
-			// 	<div>
-			// 		<Button
-			// 			classname="btn clear-all"
-			// 			label="clear all taks"
-			// 			action={() => clearAllTask()}
-			// 		></Button>
-			// 	</div>
-			// </div>
-		// </div>
 	);
 }
 

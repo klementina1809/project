@@ -1,6 +1,6 @@
 .btn {
 	border-radius: 4px;
-	background-color: rgb(48, 77, 48);
+	background-color: #FF8080;
 	border: 0px;
 	cursor: pointer;
 	width: 76px;
@@ -43,9 +43,4 @@ select {
 /* Стили для вариантов (option) внутри select */
 select option {
 	padding: 8px; /* Размер внутреннего отступа */
-}
-
-/* Стили для выбранного варианта (option) внутри select */
-select option:checked {
-	background-color: rgb(48, 77, 48); /* Цвет фона выбранного варианта */
 }

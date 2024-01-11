@@ -1,17 +1,18 @@
 import logo from "./logo.svg";
 import "./App.css";
-import ToDo2 from "./pages/toDo2";
+import ToDo from "./pages/toDo";
+import Categories from "./pages/Categories";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <ToDo2 />,
+		element: <ToDo />,
 	},
 	{
-		path: "/test",
-		element: <div>test</div>,
+		path: "/categories",
+		element: <Categories />,
 	},
 ]);
 

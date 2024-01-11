@@ -3,7 +3,7 @@
 }
 
 del {
-	color: rgb(22, 48, 32);
+	color: rgb(125, 90, 80);
 }
 
 .img-container {
@@ -17,13 +17,13 @@ del {
 }
 
 h4.green {
-	color: green;
+	color: #30E3DF;
 }
 h4.orange {
-	color: orange;
+	color: #F94A29;
 }
 h4.red {
-	color: red;
+	color: #D61355;
 }
 
 .align-center {
