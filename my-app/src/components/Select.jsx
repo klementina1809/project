@@ -11,15 +11,6 @@ function Select(props) {
 						<option value={el.id} key={el.id}>
 							{el.name}{" "}
 						</option>
-						<span
-							className="circle"
-							style={{
-								backgroundColor: el.color,
-								color: el.color,
-							}}
-						>
-							.
-						</span>
 					</>
 				);
 			})}

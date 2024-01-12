@@ -1,6 +1,6 @@
 .btn {
 	border-radius: 4px;
-	background-color: #FF8080;
+	background-color: #ff8080;
 	border: 0px;
 	cursor: pointer;
 	width: 76px;
@@ -38,9 +38,4 @@ select {
 	border-radius: 4px; /* Скругление углов */
 	outline: none; /* Убираем обводку (фокус) */
 	cursor: pointer; /* Изменяем курсор при наведении */
-}
-
-/* Стили для вариантов (option) внутри select */
-select option {
-	padding: 8px; /* Размер внутреннего отступа */
 }
