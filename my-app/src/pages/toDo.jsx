@@ -14,7 +14,7 @@ import Select from "../components/Select";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-function ToDo() {
+function ToDo(props) {
 	const [value, setValue] = useState("");
 	const [tasks, setTasks] = useState([]);
 	const [tasksCompleted, setTasksCompleted] = useState([]);
@@ -129,6 +129,8 @@ function ToDo() {
 		}
 	};
 
+	console.log("test -> ", props.test);
+
 	return (
 		<Container>
 			<Header />
@@ -206,7 +208,7 @@ function ToDo() {
 					/>
 				</Col>
 			</Row>
-			<Footer/>
+			<Footer />
 		</Container>
 	);
 }
