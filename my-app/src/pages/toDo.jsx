@@ -78,9 +78,9 @@ function ToDo(props) {
 		setTaskNextId(taskNextId + 1);
 	};
 
-	useEffect(() => {
-		console.log("-----", tasks);
-	}, [tasks]);
+		// useEffect(() => {
+		// 	console.log("-----", tasks);
+		// }, [tasks]);
 
 	const clearAllTask = () => {
 		setTasks([]);

@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/btnStyle.css";
+import "../styles/todoStyle.css";
 
 function Button(props) {
 	const { onClick, label, className } = props;

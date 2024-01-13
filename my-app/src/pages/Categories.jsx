@@ -8,6 +8,7 @@ import Comment from "../components/Comment";
 import Select from "../components/Select";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Table from "../components/Table";
 
 import "../styles/btnStyle.css";
 import "../styles/todoStyle.css";
@@ -15,9 +16,11 @@ import "../styles/todoStyle.css";
 function Categories(props) {
 	const { categories, setCategories } = props;
 
+	const [nameButton, setNameButton] = useState("Add");
+	const [id, setId] = useState("");
 	const [name, setName] = useState("");
 	const [color, setColor] = useState("");
-	const [taskNextId, setTaskNextId] = useState(3);
+	const [categoryNextId, setCategoryNextId] = useState(3);
 
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
@@ -25,25 +28,47 @@ function Categories(props) {
 		}
 	};
 
+	const editCategory = (el) => {
+		// const filteredList = categories.filter((task) => task.id !== el.id);
+		// setTasks(() => {
+		// 	return filteredList;
+		// });
+		setName(el.name);
+		setColor(el.color);
+		setId(el.id);
+		setNameButton("Edit")
+	};
+
+	const deleteCategory = (el) => {
+		const filteredList = categories.filter((category) => category.id !== el.id);
+		setCategories(() => {
+			return filteredList;
+		});
+	};
+
 	const addCategory = () => {
 		const category = {
-			id: taskNextId,
+			id: categoryNextId,
 			name: name,
 			color: color,
 		};
 		setCategories([...categories, category]);
 		setName("");
 		setColor("");
-		setTaskNextId(taskNextId + 1);
+		setCategoryNextId(categoryNextId + 1);
+		setNameButton("Add");
 	};
 
 	return (
 		<Container>
-			{/* mi servira il map che ritorna td dentro tr dentro table */}
-			{/* dopo saranno anche icon di edit e dilite */}
-			<Row>
+			<Row >
 				<Col sm={12}>
 					<Header />{" "}
+				</Col>
+			</Row>
+			<Row className="align-center mb-24">
+				<Col sm={6}>
+					{nameButton==='Edit' &&  <div>Editing of category with id {id}  </div> }
 				</Col>
 			</Row>
 			<Row className="align-center">
@@ -64,7 +89,12 @@ function Categories(props) {
 					/>
 				</Col>
 				<Col sm={2}>
-					<Button label="Add" className="btn" onClick={addCategory} />
+					<Button label={nameButton} className="btn align-center" onClick={addCategory} />
+				</Col>
+			</Row>
+			<Row className="align-center">
+				<Col sm={6}>
+					<Table th1="Name" th2="Color" categories={categories} onEdit={editCategory} onDelete={deleteCategory} />
 				</Col>
 			</Row>
 			<Row>
