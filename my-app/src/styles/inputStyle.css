@@ -1,6 +1,7 @@
 .outputContainer {
 	height: 136px;
 	/* width: 248px; */
+	width: 100%;
 	background-color: #ffddc6;
 	border-radius: 4px;
 	color: rgb(71, 50, 44);
@@ -17,11 +18,12 @@ input {
 
 input[type="text"] {
 	padding-left: 5px;
+	width: 100%;
 }
 
 .input-container {
-	padding: 5px 0px;
 	display: flex;
+	justify-content: center;
 }
 
 .inputChekbox {

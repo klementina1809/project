@@ -2,12 +2,20 @@ import React from "react";
 import "../styles/inputStyle.css";
 
 function Input(props) {
-	const { onchange, value, onKeyDown } = props;
+	const { onchange, value, onKeyDown, label } = props;
 
 	return (
-		<>
-			<input type="text" onChange={onchange} value={value} onKeyDown={onKeyDown} />
-		</>
+		<div>
+			<div>{label}</div>
+			
+				<input
+					type="text"
+					onChange={onchange}
+					value={value}
+					onKeyDown={onKeyDown}
+				/>
+			
+		</div>
 	);
 }
 

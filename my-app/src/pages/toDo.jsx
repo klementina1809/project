@@ -149,7 +149,7 @@ function ToDo(props) {
 				</Col>
 			</Row>
 			<Row className="align-center">
-				<Col sm={4} className="input-container">
+				<Col sm={6} className="input-container">
 					<Input
 						onchange={onchangeHandler}
 						value={value}
@@ -161,7 +161,7 @@ function ToDo(props) {
 						data={categories}
 						selectedItem={categorySelected}
 					/>
-					<Button classname="btn" onClick={addTask} label="Add" />
+					<Button className="btn" onClick={addTask} label="Add" />
 				</Col>
 			</Row>
 			<Row className="align-center">
@@ -192,7 +192,7 @@ function ToDo(props) {
 			<Row className="align-center mt-10">
 				<Col sm={6}>
 					<Button
-						classname="btn clear-all"
+						className="btn clear-all"
 						label="clear all taks"
 						onClick={() => clearAllTask()}
 					/>
@@ -201,23 +201,19 @@ function ToDo(props) {
 			<Row className="align-center mt-10">
 				<Col sm={3}>
 					<Button
-						classname="btn clear"
+						className="btn clear"
 						label="clear todo"
 						onClick={() => setTasks([])}
 					/>
 				</Col>
 				<Col sm={3}>
 					<Button
-						classname="btn clear"
+						className="btn clear"
 						label="clear completed"
 						onClick={() => setTasksCompleted([])}
 					/>
 				</Col>
 			</Row>
-			<button onClick={(event) => console.log(event.target.textContent)}>
-				{" "}
-				qualcosa
-			</button>
 			<Footer />
 		</Container>
 	);

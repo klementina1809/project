@@ -9,20 +9,22 @@ function Header(props) {
 	const {} = props;
 
 	return (
-		<Row className="align-center">
-			<Col sm={6}>
-				<header>
-					<ul className="navbar">
-						<li>
-							<NavLink to="/">ToDo</NavLink>
-						</li>
-						<li>
-							<NavLink to="/categories">Categories</NavLink>
-						</li>
-					</ul>
-				</header>
-			</Col>
-		</Row>
+		<Container>
+			<Row className="align-center">
+				<Col sm={12}>
+					<header>
+						<ul className="navbar">
+							<li>
+								<NavLink to="/">ToDo</NavLink>
+							</li>
+							<li>
+								<NavLink to="/categories">Categories</NavLink>
+							</li>
+						</ul>
+					</header>
+				</Col>
+			</Row>
+		</Container>
 	);
 }
 

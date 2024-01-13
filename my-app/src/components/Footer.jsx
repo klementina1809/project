@@ -10,17 +10,10 @@ function Footer(props) {
 	const {} = props;
 
 	return (
-		<Row >
+		<Row className="align-center mt-10">
 			<Col sm={12}>
 				<footer>
-					<ul className="footer">
-						<li>
-							<NavLink to="/">ToDo</NavLink>
-						</li>
-						<li>
-							<NavLink to="/categories">Categories</NavLink>
-						</li>
-					</ul>
+				© 2024 Klementina
 				</footer>
 			</Col>
 		</Row>

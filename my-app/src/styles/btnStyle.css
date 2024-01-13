@@ -3,7 +3,11 @@
 	background-color: #ff8080;
 	border: 0px;
 	cursor: pointer;
-	width: 76px;
+	width: 100%;
+
+}
+.input-container .btn {
+	max-width: 176px;
 }
 
 .btn-container {

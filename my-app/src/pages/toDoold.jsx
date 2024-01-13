@@ -133,7 +133,7 @@ function ToDo() {
 
 		// 		<div className="inputContainer">
 		// 			<Input onchange={onchangeHandler} value={value} />
-		// 			<Button classname="btn" action={addTask} label="Add" />
+		// 			<Button className="btn" action={addTask} label="Add" />
 		// 		</div>
 		// 		<Output
 		// 			label="To Do"
@@ -178,27 +178,27 @@ function ToDo() {
 		// 		))}
 		// 	></Output>
 		// 	total: {total}
-			// <div className="contain-buttons">
-			// 	<div className="btn-container">
-			// 		<Button
-			// 			classname="btn"
-			// 			label="clear todo"
-			// 			action={() => setTasks([])}
-			// 		></Button>
-			// 		<Button
-			// 			classname="btn"
-			// 			label="clear completed"
-			// 			action={() => setTasksCompleted([])}
-			// 		></Button>
-			// 	</div>
-			// 	<div>
-			// 		<Button
-			// 			classname="btn clear-all"
-			// 			label="clear all taks"
-			// 			action={() => clearAllTask()}
-			// 		></Button>
-			// 	</div>
-			// </div>
+		// <div className="contain-buttons">
+		// 	<div className="btn-container">
+		// 		<Button
+		// 			className="btn"
+		// 			label="clear todo"
+		// 			action={() => setTasks([])}
+		// 		></Button>
+		// 		<Button
+		// 			className="btn"
+		// 			label="clear completed"
+		// 			action={() => setTasksCompleted([])}
+		// 		></Button>
+		// 	</div>
+		// 	<div>
+		// 		<Button
+		// 			className="btn clear-all"
+		// 			label="clear all taks"
+		// 			action={() => clearAllTask()}
+		// 		></Button>
+		// 	</div>
+		// </div>
 		// </div>
 	);
 }
