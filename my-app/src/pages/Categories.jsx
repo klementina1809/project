@@ -1,4 +1,4 @@
-import {React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 
 import { Container, Row, Col } from "react-grid-system";
 import Input from "../components/Input";
@@ -19,11 +19,6 @@ function Categories(props) {
 	const [color, setColor] = useState("");
 	const [taskNextId, setTaskNextId] = useState(3);
 
-
-	// const onchangeHandler = (e) => {
-	// 	setName(e.target.value);
-	// 	setColor(e.target.value);
-	// };
 	const handleKeyPress = (e) => {
 		if (e.key === "Enter") {
 			addCategory();
@@ -31,13 +26,12 @@ function Categories(props) {
 	};
 
 	const addCategory = () => {
-
 		const category = {
 			id: taskNextId,
 			name: name,
 			color: color,
 		};
-		// setCategories([...categories, category]);
+		setCategories([...categories, category]);
 		setName("");
 		setColor("");
 		setTaskNextId(taskNextId + 1);
@@ -70,7 +64,7 @@ function Categories(props) {
 					/>
 				</Col>
 				<Col sm={2}>
-					<Button label="Add" className="btn"  onClick={addCategory} />
+					<Button label="Add" className="btn" onClick={addCategory} />
 				</Col>
 			</Row>
 			<Row>

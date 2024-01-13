@@ -31,7 +31,7 @@ function App() {
 		},
 		{
 			path: "/categories",
-			element: <Categories categories={categories} />,
+			element: <Categories categories={categories} setCategories={setCategories} />,
 		},
 	]);
 	return <RouterProvider router={router} />;
