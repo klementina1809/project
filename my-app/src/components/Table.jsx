@@ -11,7 +11,7 @@ function Table(props) {
 	const { th1, th2, categories, onEdit, onDelete } = props;
 
 	useEffect(() => {
-		console.log("category", console.log(categories));
+		console.log("categories", console.log(categories));
 	}, []);
 
 	return (

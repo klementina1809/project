@@ -28,47 +28,59 @@ function Categories(props) {
 		}
 	};
 
-	const editCategory = (el) => {
-		// const filteredList = categories.filter((task) => task.id !== el.id);
-		// setTasks(() => {
-		// 	return filteredList;
-		// });
-		setName(el.name);
-		setColor(el.color);
-		setId(el.id);
-		setNameButton("Edit")
-	};
-
 	const deleteCategory = (el) => {
-		const filteredList = categories.filter((category) => category.id !== el.id);
+		const filteredList = categories.filter(
+			(category) => category.id !== el.id
+		);
 		setCategories(() => {
 			return filteredList;
 		});
 	};
+	const editCategory = (el) => {
+		setName(el.name);
+		setColor(el.color);
+		setId(el.id);
+		setNameButton("Edit");
+	};
 
-	const addCategory = () => {
-		const category = {
-			id: categoryNextId,
-			name: name,
-			color: color,
-		};
-		setCategories([...categories, category]);
+	const addCategory = (e) => {
+		if (e.target.textContent === "Add") {
+			const category = {
+				id: categoryNextId,
+				name: name,
+				color: color,
+			};
+			setCategories([...categories, category]);
+			setCategoryNextId(categoryNextId + 1);
+		} else {
+			const filteredList = categories.filter(
+				(category) => category.id !== id
+			);
+
+			const category = {
+				id: id,
+				name: name,
+				color: color,
+			};
+			setCategories([...filteredList, category]);
+			setNameButton("Add");
+		}
 		setName("");
 		setColor("");
-		setCategoryNextId(categoryNextId + 1);
-		setNameButton("Add");
 	};
 
 	return (
 		<Container>
-			<Row >
+			<Row>
 				<Col sm={12}>
 					<Header />{" "}
 				</Col>
 			</Row>
 			<Row className="align-center mb-24">
 				<Col sm={6}>
-					{nameButton==='Edit' &&  <div>Editing of category with id {id}  </div> }
+					{nameButton === "Edit" && (
+						<div>Editing of category with id {id} </div>
+					)}
 				</Col>
 			</Row>
 			<Row className="align-center">
@@ -89,12 +101,22 @@ function Categories(props) {
 					/>
 				</Col>
 				<Col sm={2}>
-					<Button label={nameButton} className="btn align-center" onClick={addCategory} />
+					<Button
+						label={nameButton}
+						className="btn align-center"
+						onClick={(e) => addCategory(e)}
+					/>
 				</Col>
 			</Row>
 			<Row className="align-center">
 				<Col sm={6}>
-					<Table th1="Name" th2="Color" categories={categories} onEdit={editCategory} onDelete={deleteCategory} />
+					<Table
+						th1="Name"
+						th2="Color"
+						categories={categories}
+						onEdit={editCategory}
+						onDelete={deleteCategory}
+					/>
 				</Col>
 			</Row>
 			<Row>

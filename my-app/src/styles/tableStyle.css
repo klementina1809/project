@@ -1,13 +1,13 @@
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  margin-top: 40px;
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	margin-top: 40px;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
+th,
+td {
+	border: 1px solid #ffddc6;
+	padding: 8px;
+	text-align: center;
 }
-
