@@ -15,28 +15,30 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 function ToDo(props) {
+	const { categories } = props;
+
 	const [value, setValue] = useState("");
 	const [tasks, setTasks] = useState([]);
 	const [tasksCompleted, setTasksCompleted] = useState([]);
 	const [taskNextId, setTaskNextId] = useState(0);
 
-	const [categories, setCategories] = useState([
-		{
-			id: 0,
-			name: "Personal",
-			color: "#D61355",
-		},
-		{
-			id: 1,
-			name: "Work",
-			color: "#F94A29",
-		},
-		{
-			id: 2,
-			name: "Other",
-			color: "#30E3DF",
-		},
-	]);
+	// const [categories, setCategories] = useState([
+	// 	{
+	// 		id: 0,
+	// 		name: "Personal",
+	// 		color: "#D61355",
+	// 	},
+	// 	{
+	// 		id: 1,
+	// 		name: "Work",
+	// 		color: "#F94A29",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		name: "Other",
+	// 		color: "#30E3DF",
+	// 	},
+	// ]);
 	const [categorySelected, setCategorySelected] = useState(0);
 
 	const handleTaskAction = (action, el) => {
@@ -93,9 +95,13 @@ function ToDo(props) {
 	};
 
 	const copyTask = (el) => {
+		const category = categories.find(
+			(category) => category.id === +categorySelected
+		);
 		const task = {
 			id: taskNextId,
 			name: el.name + " (2)",
+			category: category,
 		};
 		setTaskNextId(taskNextId + 1);
 		setTasks(() => [...tasks, task]);
@@ -208,6 +214,10 @@ function ToDo(props) {
 					/>
 				</Col>
 			</Row>
+			<button onClick={(event) => console.log(event.target.textContent)}>
+				{" "}
+				qualcosa
+			</button>
 			<Footer />
 		</Container>
 	);
