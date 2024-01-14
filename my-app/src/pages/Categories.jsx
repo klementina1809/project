@@ -3,9 +3,9 @@ import { React, useState, useEffect } from "react";
 import { Container, Row, Col } from "react-grid-system";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import ListContainer from "../components/ListContainer";
-import Comment from "../components/Comment";
-import Select from "../components/Select";
+// import ListContainer from "../components/ListContainer";
+// import Comment from "../components/Comment";
+// import Select from "../components/Select";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Table from "../components/Table";
@@ -53,16 +53,12 @@ function Categories(props) {
 			setCategories([...categories, category]);
 			setCategoryNextId(categoryNextId + 1);
 		} else {
-			const filteredList = categories.filter(
-				(category) => category.id !== id
+			const editedCategories = categories.map((category) =>
+				category.id === id
+					? { ...category, name: name, color: color }
+					: category
 			);
-
-			const category = {
-				id: id,
-				name: name,
-				color: color,
-			};
-			setCategories([...filteredList, category]);
+			setCategories(editedCategories);
 			setNameButton("Add");
 		}
 		setName("");

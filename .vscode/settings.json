@@ -1,0 +1,5 @@
+{
+	"html-to-css-autocompletion.autocompletionFilesScope": "linked-files",
+	"html-to-css-autocompletion.triggerCharacters": true,
+	"liveServer.settings.port": 5501
+}

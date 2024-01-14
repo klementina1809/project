@@ -22,23 +22,6 @@ function ToDo(props) {
 	const [tasksCompleted, setTasksCompleted] = useState([]);
 	const [taskNextId, setTaskNextId] = useState(0);
 
-	// const [categories, setCategories] = useState([
-	// 	{
-	// 		id: 0,
-	// 		name: "Personal",
-	// 		color: "#D61355",
-	// 	},
-	// 	{
-	// 		id: 1,
-	// 		name: "Work",
-	// 		color: "#F94A29",
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		name: "Other",
-	// 		color: "#30E3DF",
-	// 	},
-	// ]);
 	const [categorySelected, setCategorySelected] = useState(0);
 
 	const handleTaskAction = (action, el) => {
@@ -78,9 +61,9 @@ function ToDo(props) {
 		setTaskNextId(taskNextId + 1);
 	};
 
-		// useEffect(() => {
-		// 	console.log("-----", tasks);
-		// }, [tasks]);
+	// useEffect(() => {
+	// 	console.log("-----", tasks);
+	// }, [tasks]);
 
 	const clearAllTask = () => {
 		setTasks([]);
@@ -134,8 +117,6 @@ function ToDo(props) {
 			addTask();
 		}
 	};
-
-	console.log("test -> ", props.test);
 
 	return (
 		<Container>
@@ -193,7 +174,7 @@ function ToDo(props) {
 				<Col sm={6}>
 					<Button
 						className="btn clear-all"
-						label="clear all taks"
+						label="clear all tasks"
 						onClick={() => clearAllTask()}
 					/>
 				</Col>

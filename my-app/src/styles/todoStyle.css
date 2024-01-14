@@ -17,16 +17,23 @@ del {
 }
 
 h4.green {
-	color: #30E3DF;
+	color: #30e3df;
 }
 h4.orange {
-	color: #F94A29;
+	color: #f94a29;
 }
 h4.red {
-	color: #D61355;
+	color: #d61355;
 }
 
 .align-center {
 	justify-content: center !important;
 	text-align: center;
+}
+
+.btn-lg {
+	width: auto;
+}
+.btn-green {
+	background-color: #30e3df;
 }

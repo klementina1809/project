@@ -4,7 +4,6 @@
 	border: 0px;
 	cursor: pointer;
 	width: 100%;
-
 }
 .input-container .btn {
 	max-width: 176px;
@@ -42,11 +41,12 @@
 	margin-bottom: 24px;
 }
 
-
 select {
 	padding: 10px; /* Размер внутреннего отступа */
 	font-size: 16px; /* Размер шрифта */
 	border-radius: 4px; /* Скругление углов */
 	outline: none; /* Убираем обводку (фокус) */
 	cursor: pointer; /* Изменяем курсор при наведении */
+	border: 0;
+	margin-left: 10px;
 }

@@ -2,6 +2,7 @@ import { React, useEffect } from "react";
 import { Container, Row, Col } from "react-grid-system";
 import { FaTrash, FaPen } from "react-icons/fa";
 
+
 import "../styles/btnStyle.css";
 import "../styles/todoStyle.css";
 import "../styles/tableStyle.css";
@@ -30,16 +31,14 @@ function Table(props) {
 							<tr key={category.id}>
 								<td>{category.name}</td>
 								<td>
-									{category.color}
+									<span>{category.color}</span>
 									<span
 										className="circle"
 										style={{
 											backgroundColor: category.color,
 											color: category.color,
 										}}
-									>
-										оо
-									</span>
+									></span>
 								</td>
 								<td>
 									<div>
@@ -64,6 +63,8 @@ function Table(props) {
 							</tr>
 						);
 					})}
+					
+				
 				</tbody>
 			</table>
 		</Container>
