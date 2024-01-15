@@ -6,17 +6,19 @@ import Footer from "../components/Footer";
 import Select from "../components/Select";
 
 import "../styles/todoStyle.css";
+import "../styles/selectStyle.css";
 
-function ExampleSelect(props) {
-	const { categories, setCategories } = props;
+function ExampleSelect({ categories, setCategories }) {
+	// const { categories, setCategories } = props;
 	const [categorySelected, setCategorySelected] = useState(0);
 	const [spans, setSpans] = useState([]);
+	const [color, setColor] = useState("");
+	const [spanStyle, setSpanStyle] = useState("");
 	const [value, setValue] = useState("");
 
 	useEffect(() => {
-		let count = spans.filter((span) => span.name === "Work").length;
-		console.log("volte di work: ", count);
-	}, [spans]);
+		setSpanStyle(color);
+	}, [color]);
 
 	const selectChange = (e) => {
 		const value = +e.target.value;
@@ -29,6 +31,10 @@ function ExampleSelect(props) {
 		setSpans([...spans, span]);
 	};
 
+	const changeColorHandler = (e) => {
+		setColor(() => e.target.value);
+	};
+
 	return (
 		<Container>
 			<Row>
@@ -37,7 +43,7 @@ function ExampleSelect(props) {
 				</Col>
 			</Row>
 			<Row className="align-center">
-				<Col sm={6}>
+				<Col sm={2}>
 					<Select
 						name="category"
 						onChange={selectChange}
@@ -45,11 +51,29 @@ function ExampleSelect(props) {
 						selectedItem={categorySelected}
 					/>
 				</Col>
+				<Col sm={2}>
+					<select
+						name="colors"
+						value={color}
+						onChange={changeColorHandler}
+					>
+						<option value="" disabled selected>
+							Color
+						</option>
+						<option value="red">Red</option>
+						<option value="green">Green</option>
+						<option value="yellow">Yellow</option>
+					</select>
+				</Col>
 			</Row>
 			<Row className="align-center">
 				<Col sm={6}>
 					{spans.map((span, index) => {
-						return <span key={index}>{span.name}</span>;
+						return (
+							<span className={spanStyle} key={index}>
+								{span.name}
+							</span>
+						);
 					})}
 				</Col>
 			</Row>

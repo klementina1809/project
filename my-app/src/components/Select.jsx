@@ -1,7 +1,7 @@
 import "../styles/inputStyle.css";
 
 function Select(props) {
-	const { name, onChange, data, selectedItem } = props;
+	const { name, onChange, data, selectedItem, } = props;
 
 	return (
 		<select onChange={onChange} name={name} id={name} value={selectedItem}>
@@ -9,7 +9,7 @@ function Select(props) {
 				return (
 					<option value={el.id} key={el.id}>
 						{el.name}{" "}
-					</option>
+					</option> 
 				);
 			})}
 		</select>
@@ -17,3 +17,4 @@ function Select(props) {
 }
 
 export default Select;
+
