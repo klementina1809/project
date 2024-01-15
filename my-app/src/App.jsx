@@ -4,6 +4,7 @@ import ToDo from "./pages/toDo";
 import Categories from "./pages/Categories";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ExampleSelect from "./pages/ExampleSelect";
 
 function App() {
 	const [categories, setCategories] = useState([
@@ -32,6 +33,10 @@ function App() {
 		{
 			path: "/categories",
 			element: <Categories categories={categories} setCategories={setCategories} />,
+		},
+		{
+			path: "/example_select",
+			element: <ExampleSelect categories={categories} setCategories={setCategories} />,
 		},
 	]);
 	return <RouterProvider router={router} />;

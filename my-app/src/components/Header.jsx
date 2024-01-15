@@ -20,6 +20,9 @@ function Header(props) {
 							<li>
 								<NavLink to="/categories">Categories</NavLink>
 							</li>
+							<li>
+								<NavLink to="/example_select">Example</NavLink>
+							</li>
 						</ul>
 					</header>
 				</Col>
