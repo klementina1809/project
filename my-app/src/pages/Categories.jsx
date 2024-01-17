@@ -32,9 +32,7 @@ function Categories(props) {
 		const filteredList = categories.filter(
 			(category) => category.id !== el.id
 		);
-		setCategories(() => {
-			return filteredList;
-		});
+		setCategories(JSON.stringify(filteredList));
 	};
 	const editCategory = (el) => {
 		setName(el.name);
@@ -50,7 +48,7 @@ function Categories(props) {
 				name: name,
 				color: color,
 			};
-			setCategories([...categories, category]);
+			setCategories(JSON.stringify([...categories, category]));
 			setCategoryNextId(categoryNextId + 1);
 		} else {
 			const editedCategories = categories.map((category) =>
@@ -58,7 +56,7 @@ function Categories(props) {
 					? { ...category, name: name, color: color }
 					: category
 			);
-			setCategories(editedCategories);
+			setCategories(JSON.stringify(editedCategories));
 			setNameButton("Add");
 		}
 		setName("");

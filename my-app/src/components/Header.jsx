@@ -23,6 +23,12 @@ function Header(props) {
 							<li>
 								<NavLink to="/example_select">Example</NavLink>
 							</li>
+							<li>
+								<NavLink to="/random">Random</NavLink>
+							</li>
+							<li>
+								<NavLink to="/local_storage">Local</NavLink>
+							</li>
 						</ul>
 					</header>
 				</Col>

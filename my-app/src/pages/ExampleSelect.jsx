@@ -10,15 +10,20 @@ import "../styles/selectStyle.css";
 
 function ExampleSelect({ categories, setCategories }) {
 	// const { categories, setCategories } = props;
-	const [categorySelected, setCategorySelected] = useState(0);
+	const [categorySelected, setCategorySelected] = useState(-1);
 	const [spans, setSpans] = useState([]);
 	const [color, setColor] = useState("");
 	const [spanStyle, setSpanStyle] = useState("");
-	const [value, setValue] = useState("");
 
 	useEffect(() => {
 		setSpanStyle(color);
 	}, [color]);
+
+	const colors = [
+		{ id: "red", name: "Red" },
+		{ id: "green", name: "Green" },
+		{ id: "yellow", name: "Yellow" },
+	];
 
 	const selectChange = (e) => {
 		const value = +e.target.value;
@@ -26,7 +31,6 @@ function ExampleSelect({ categories, setCategories }) {
 		setCategorySelected(value);
 
 		const category = categories.find((category) => category.id === value);
-		setValue(category.name);
 		const span = { id: value, name: category.name };
 		setSpans([...spans, span]);
 	};
@@ -46,24 +50,20 @@ function ExampleSelect({ categories, setCategories }) {
 				<Col sm={2}>
 					<Select
 						name="category"
-						onChange={selectChange}
 						data={categories}
+						onChange={selectChange}
 						selectedItem={categorySelected}
+						placeholder="Select category"
 					/>
 				</Col>
 				<Col sm={2}>
-					<select
+					<Select
 						name="colors"
-						value={color}
+						data={colors}
 						onChange={changeColorHandler}
-					>
-						<option value="" disabled selected>
-							Color
-						</option>
-						<option value="red">Red</option>
-						<option value="green">Green</option>
-						<option value="yellow">Yellow</option>
-					</select>
+						selectedItem={color}
+						placeholder="Select color"
+					/>
 				</Col>
 			</Row>
 			<Row className="align-center">
