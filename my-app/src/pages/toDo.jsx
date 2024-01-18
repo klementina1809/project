@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useLocalStorage from "use-local-storage";
 import { Container, Row, Col } from "react-grid-system";
 import { NavLink } from "react-router-dom";
 
@@ -18,8 +19,11 @@ function ToDo(props) {
 	const { categories } = props;
 
 	const [value, setValue] = useState("");
-	const [tasks, setTasks] = useState([]);
-	const [tasksCompleted, setTasksCompleted] = useState([]);
+	const [tasks, setTasks] = useLocalStorage("tasks", JSON.stringify([]));
+	const [tasksCompleted, setTasksCompleted] = useLocalStorage(
+		"tasksCompleted",
+		JSON.stringify([])
+	);
 	const [taskNextId, setTaskNextId] = useState(0);
 
 	const [categorySelected, setCategorySelected] = useState(0);
@@ -56,7 +60,8 @@ function ToDo(props) {
 			name: value,
 			category: category,
 		};
-		setTasks([...tasks, task]);
+		const tasksObj = JSON.parse(tasks);
+		setTasks(JSON.stringify([...tasksObj, task]));
 		setValue("");
 		setTaskNextId(taskNextId + 1);
 	};
@@ -66,15 +71,15 @@ function ToDo(props) {
 	// }, [tasks]);
 
 	const clearAllTask = () => {
-		setTasks([]);
-		setTasksCompleted([]);
+		setTasks(JSON.stringify([]));
+		setTasksCompleted(JSON.stringify([]));
 	};
 
 	const deleteTask = (el) => {
-		const filteredList = tasks.filter((task) => task.id !== el.id);
-		setTasks(() => {
-			return filteredList;
-		});
+		const filteredList = JSON.parse(tasks).filter(
+			(task) => task.id !== el.id
+		);
+		setTasks(JSON.stringify(filteredList));
 	};
 
 	const copyTask = (el) => {
@@ -87,29 +92,34 @@ function ToDo(props) {
 			category: category,
 		};
 		setTaskNextId(taskNextId + 1);
-		setTasks(() => [...tasks, task]);
+		const tasksObj = JSON.parse(tasks);
+		setTasks(() => JSON.stringify([...tasksObj, task]));
 	};
 
 	const editTask = (el) => {
-		const filteredList = tasks.filter((task) => task.id !== el.id);
-		setTasks(() => {
-			return filteredList;
-		});
+		const filteredList = JSON.parse(tasks).filter(
+			(task) => task.id !== el.id
+		);
+		setTasks(JSON.stringify(filteredList));
 		setValue(el.name);
 	};
 
 	const complete = (el) => {
-		const filteredList = tasks.filter((task) => task.id !== el.id);
-		setTasks(() => {
-			return filteredList;
-		});
-		setTasksCompleted([...tasksCompleted, el]);
+		const filteredList = JSON.parse(tasks).filter(
+			(task) => task.id !== el.id
+		);
+		setTasks(JSON.stringify(filteredList));
+		const tasksCompletedObj = JSON.parse(tasksCompleted);
+		setTasksCompleted(JSON.stringify([...tasksCompletedObj, el]));
 	};
 
 	const uncomplete = (el) => {
-		const filteredList = tasksCompleted.filter((task) => task.id !== el.id);
-		setTasksCompleted(() => filteredList);
-		setTasks([...tasks, el]);
+		const filteredList = JSON.parse(tasksCompleted).filter(
+			(task) => task.id !== el.id
+		);
+		setTasksCompleted(JSON.stringify(filteredList));
+		const tasksObj = JSON.parse(tasks);
+		setTasks(JSON.stringify([...tasksObj, el]));
 	};
 
 	const handleKeyPress = (e) => {
@@ -124,8 +134,8 @@ function ToDo(props) {
 			<Row className="align-center">
 				<Col sm={6}>
 					<Comment
-						tasksNumber={tasks.length}
-						completedTasksNumber={tasksCompleted.length}
+						tasksNumber={JSON.parse(tasks).length}
+						completedTasksNumber={JSON.parse(tasksCompleted).length}
 					/>
 				</Col>
 			</Row>
@@ -148,7 +158,7 @@ function ToDo(props) {
 			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
-						tasks={tasks}
+						tasks={JSON.parse(tasks)}
 						label="To Do"
 						checked={false}
 						onCheck={complete}
@@ -163,7 +173,7 @@ function ToDo(props) {
 			<Row className="align-center">
 				<Col sm={6}>
 					<ListContainer
-						tasks={tasksCompleted}
+						tasks={JSON.parse(tasksCompleted)}
 						label="Completed"
 						checked={true}
 						onCheck={uncomplete}
@@ -184,14 +194,14 @@ function ToDo(props) {
 					<Button
 						className="btn clear"
 						label="clear todo"
-						onClick={() => setTasks([])}
+						onClick={() => setTasks(JSON.stringify([]))}
 					/>
 				</Col>
 				<Col sm={3}>
 					<Button
 						className="btn clear"
 						label="clear completed"
-						onClick={() => setTasksCompleted([])}
+						onClick={() => setTasksCompleted(JSON.stringify([]))}
 					/>
 				</Col>
 			</Row>
