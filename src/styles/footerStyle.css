@@ -1,8 +1,8 @@
-ul.navbar {
+ul.footer {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	gap: 10px;
+	gap: 40px;
 
 	list-style-type: none;
 
@@ -11,11 +11,10 @@ ul.navbar {
 	border-radius: 4px;
 	height: 36px;
 
-	background-color: #3b3b3b;
-  margin-bottom: 40px;
+  margin-top: 50px;
 }
 
-ul.navbar a {
+ul.footer a {
 	font-weight: 700;
-	color: #30e3df;
+	color: #ffedfe;
 }
