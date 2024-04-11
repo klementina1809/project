@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import useLocalStorage from "use-local-storage";
 
 import ToDo from "./pages/toDo";
@@ -32,7 +32,7 @@ function App() {
 		])
 	);
 
-	const router = createBrowserRouter([
+	const router = createHashRouter([
 		{
 			path: "/",
 			element: <ToDo categories={JSON.parse(categories)} />,
